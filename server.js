@@ -67,22 +67,22 @@ const startTrackerPrompts = () => {
       //control statements for each menu option
 
       if (menuChoices === "View all employees") {
-        viewEmployees();
+        displayEmployees();
       }
       if (menuChoices === "View employees by department") {
-        viewEmployeesByDepartment();
+        displayEmployeesByDepartment();
       }
       if (menuChoices === "View employees by manager") {
-        viewEmployeesByManager();
+        displayEmployeesByManager();
       }
       if (menuChoices === "View all departments") {
-        viewAllDepartments();
+        displayAllDepartments();
       }
       if (menuChoices === "View department budgets") {
-        viewDepartmentBudgets();
+        displayDepartmentBudgets();
       }
       if (menuChoices === "View all roles") {
-        viewAllRoles();
+        displayAllRoles();
       }
       if (menuChoices === "Add employee") {
         addEmployee();
@@ -113,6 +113,94 @@ const startTrackerPrompts = () => {
       }
     });
 };
+
+//displays all employees
+// router.get('/candidates', (req, res) => {
+//   const sql = `SELECT candidates.*, parties.name
+//                 AS party_name
+//                 FROM candidates
+//                 LEFT JOIN parties
+//                 ON candidates.party_id = parties.id`;
+
+//   db.query(sql, (err, rows) => {
+//     if (err) {
+//       res.status(500).json({ error: err.message });
+//       return;
+//     }
+//     res.json({
+//       message: 'success',
+//       data: rows
+//     });
+//   });
+// });
+const displayEmployees = () => {
+  console.log("Displaying all employees...");
+  //set employeeRead to a variable with a literal that is an sql query
+  const employeeRead = `SELECT employee.id,
+  employee.first_name,
+  employee.last_name,
+  roles.title,
+  department.departmentName AS department,
+  roles.salary,
+  CONCAT (manager.first_name, " ", manager.last_name) AS manager
+  FROM employee
+  LEFT JOIN roles ON employee.role_id = roles.id
+  LEFT JOIN department ON roles.department_id = department.id
+  LEFT JOIN employee manager ON employee.manager_id = manager.id`;
+  //promise that display output from db query
+  connection
+    .promise()
+    .query(employeeRead)
+    .then(([rows]) => {
+      let employee = rows;
+      console.table("Employees", employee);
+    })
+    .catch((err) => console.log(err));
+
+  startTrackerPrompts();
+};
+
+// if (menuChoices === "View employees by department") {
+//   displayEmployeesByDepartment();
+// }
+// if (menuChoices === "View employees by manager") {
+//   displayEmployeesByManager();
+// }
+// if (menuChoices === "View all departments") {
+//   displayAllDepartments();
+// }
+// if (menuChoices === "View department budgets") {
+//   displayDepartmentBudgets();
+// }
+// if (menuChoices === "View all roles") {
+//   displayAllRoles();
+// }
+// if (menuChoices === "Add employee") {
+//   addEmployee();
+// }
+// if (menuChoices === "Add department") {
+//   addDepartment();
+// }
+// if (menuChoices === "Add role") {
+//   addRole();
+// }
+// if (menuChoices === "Delete employee") {
+//   deleteEmployee();
+// }
+// if (menuChoices === "Delete role") {
+//   deleteRole();
+// }
+// if (menuChoices === "Update employee role") {
+//   updateEmployeeRole();
+// }
+// if (menuChoices === "Update manager role") {
+//   updateManagerRole();
+// }
+// if (menuChoices === "Update manager of employee") {
+//   updateManagerOfEmployee();
+// }
+// if (menuChoices === "Exit") {
+//   connection.end();
 
 //function call to start employee tracker prompts
 startTrackerPrompts();

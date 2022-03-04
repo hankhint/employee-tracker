@@ -1,6 +1,6 @@
 
 --seeds for roles
-INSERT INTO department (name)
+INSERT INTO department (departmentName)
 VALUES
     ('Administration'),
     ('Marketing'),

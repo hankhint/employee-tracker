@@ -8,10 +8,9 @@ USE employeeDatabase;
 
 --create table for department
 CREATE TABLE department (
-    id INT AUTO_INCREMENT PRIMARY KEY;
-    name VARCHAR(60) NOT NULL
-)
-
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    departmentName VARCHAR(30) NOT NULL
+);
 --create table for roles
 CREATE TABLE roles (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -19,7 +18,7 @@ CREATE TABLE roles (
     salary DECIMAL(8,2) NOT NULL,
     department_id INT,
     FOREIGN KEY (department_id) REFERENCES department(id)
-)
+);
 
 --create table for employees
 CREATE TABLE employee (
@@ -30,4 +29,4 @@ CREATE TABLE employee (
     manager_id INT,
     FOREIGN KEY (role_id) REFERENCES roles(id),
     FOREIGN KEY (manager_id) REFERENCES employee(id)
-)
+);
