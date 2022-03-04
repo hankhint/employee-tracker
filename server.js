@@ -28,4 +28,5 @@ connection.connect((err) => {
         console.log(err);
         return;
     }
+    console.log(`Welcome to the employee database. ID: ${connection.threadId}`)
 })
