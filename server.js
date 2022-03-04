@@ -65,5 +65,51 @@ const startTrackerPrompts = () => {
         const { menuChoices } = answers;
 
         //control statements for each menu option
+
+        if (menuChoices === 'View all employees') {
+            viewEmployees();
+        }
+        if (menuChoices === 'View employees by department') {
+            viewEmployeesByDepartment();
+        }
+        if (menuChoices === 'View employees by manager') {
+            viewEmployeesByManager();
+        }
+        if (menuChoices === 'View all departments') {
+            viewAllDepartments();
+        }
+        if (menuChoices === 'View department budgets') {
+            viewDepartmentBudgets();
+        }
+        if (menuChoices === 'View all roles') {
+            viewAllRoles();
+        }
+        if (menuChoices === 'Add employee') {
+            addEmployee();
+        }
+        if (menuChoices === 'Add department') {
+            addDepartment();
+        }
+        if (menuChoices === 'Add role') {
+            addRole();
+        }
+        if (menuChoices === 'Delete employee') {
+            deleteEmployee();
+        }
+        if (menuChoices === 'Delete role') {
+            deleteRole();
+        }
+        if (menuChoices === 'Update employee role') {
+            updateEmployeeRole();
+        }
+        if (menuChoices === 'Update manager role') {
+            updateManagerRole();
+        }
+        if (menuChoices === 'Update manager of employee') {
+            updateManagerOfEmployee();
+        }
+        if (menuChoices === 'Exit') {
+            connection.end();
+        }
     })
 };
